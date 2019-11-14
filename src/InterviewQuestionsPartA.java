@@ -28,7 +28,7 @@ public class InterviewQuestionsPartA {
         //  What is the BMI results for our patients?
         //  let's only print out the normal ones
         for (Patient patient : patients) {
-            String bmiMessage = bodyMassIndex(patient.getHeigth(), patient.getWeight());
+            String bmiMessage = bodyMassIndex(patient.getHeight(), patient.getWeight());
             if (bmiMessage.startsWith("Normal"))
                 System.out.format("%s %s is %s%n", patient.getFirstName(), patient.getLastName(), bmiMessage);
         }
