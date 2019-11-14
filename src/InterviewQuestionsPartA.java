@@ -8,7 +8,7 @@ public class InterviewQuestionsPartA {
         List<Crime> crimes = Crime.loadRecords("src/Crime.csv");
 
         //  let's do some quick data analysis on the crimes database.
-        //  Let's compare two Boroughs to wee which one has the most crime
+        //  Let's compare two Boroughs to see which one has the most crime
         int borough1Crimes = 0, borough2Crimes = 0;
         String borough1, borough2;
         borough1 = Utils.getInput("1st Borough: ");
@@ -19,17 +19,30 @@ public class InterviewQuestionsPartA {
             if (crime.getBorough().equalsIgnoreCase(borough2)) borough2Crimes++;
         }
         if (borough1Crimes > borough2Crimes) {
-            System.out.format("%s has more crimes (%d) than %s (%d)", borough1, borough1Crimes, borough2, borough2Crimes);
+            System.out.format("%s has more crimes (%d) than %s (%d)\n", borough1, borough1Crimes, borough2, borough2Crimes);
         } else {
-            System.out.format("%s has more crimes (%d) than %s (%d)", borough2, borough2Crimes, borough1, borough1Crimes);
+            System.out.format("%s has more crimes (%d) than %s (%d)\n", borough2, borough2Crimes, borough1, borough1Crimes);
         }
 
-        //  What is the BMI results for out patients?
+        //  now move on to the patients data
+        //  What is the BMI results for our patients?
+        //  let's only print out the normal ones
         for (Patient patient : patients) {
             String bmiMessage = bodyMassIndex(patient.getHeigth(), patient.getWeight());
-            System.out.format("%s %s is %s", patient.getFirstName(), patient.getLastName(), bmiMessage);
+            if (bmiMessage.startsWith("Normal"))
+                System.out.format("%s %s is %s%n", patient.getFirstName(), patient.getLastName(), bmiMessage);
         }
 
+        //  We certainly do not need to do another for loop for the patients
+        //  but I want to keep the examples simple
+        Patient oldest = patients.get(0);        // Get the first patient to use as our target
+        for (Patient patient : patients) {
+            if (patient.getAge() > oldest.getAge())
+                oldest = patient;
+        }
+        System.out.format("%nThe oldest patient is %s %s and they are %d years old%n", oldest.getFirstName(), oldest.getLastName(), oldest.getAge());
+
+        //  finally a tour of the student records
         //  which student has the highest GPA
         Student best;
         best = students.get(0);         //  Get first student as our target student
@@ -37,16 +50,16 @@ public class InterviewQuestionsPartA {
             if (best.getGpa() < student.getGpa())
                 best = student;
         }
-        System.out.println("");
+        System.out.format("%n%s has the highest %f%n", best.getName(), best.getGpa());
     }
 
     public static String bodyMassIndex(float height, float weight) {
         String msg;
         float bmi = (weight / (height * height)) * 703;
-        if (bmi < 18.5) msg = "Underweight";
-        else if (bmi >= 18.5 && bmi < 25) msg = "Normal";
-        else if (bmi >= 25 && bmi < 30) msg = "Overweight";
-        else msg = "Obese";
+        if (bmi < 18.5) msg = "Underweight - BMI = " + bmi;
+        else if (bmi >= 18.5 && bmi < 25) msg = "Normal - BMI = " + bmi;
+        else if (bmi >= 25 && bmi < 30) msg = "Overweight - BMI = " + bmi;
+        else msg = "Obese - BMI = " + bmi;
         return msg;
     }
 
