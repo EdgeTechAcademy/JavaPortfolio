@@ -13,7 +13,7 @@ public class Patient {
     private int temperature;
     private int systolic;
     private int diastolic;
-    private int heigth;
+    private int height;
     private int weight;
     private int age;
     private int howYaFeelin;
@@ -48,11 +48,11 @@ public class Patient {
     public void setDiastolic(int diastolic) {
         this.diastolic = diastolic;
     }
-    public int getHeigth() {
-        return heigth;
+    public int getHeight() {
+        return height;
     }
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
+    public void setHeight(int height) {
+        this.height = height;
     }
     public int getWeight() {
         return weight;
@@ -81,20 +81,20 @@ public class Patient {
                 ", temperature=" + temperature +
                 ", systolic=" + systolic +
                 ", diastolic=" + diastolic +
-                ", heigth=" + heigth +
+                ", height=" + height +
                 ", weight=" + weight +
                 ", age=" + age +
                 ", howYaFeelin=" + howYaFeelin +
                 '}';
     }
 
-    public Patient(String lastName, String firstName, int temperature, int systolic, int diastolic, int heigth, int weight, int age, int howYaFeelin) {
+    public Patient(String lastName, String firstName, int temperature, int systolic, int diastolic, int height, int weight, int age, int howYaFeelin) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.temperature = temperature;
         this.systolic = systolic;
         this.diastolic = diastolic;
-        this.heigth = heigth;
+        this.height = height;
         this.weight = weight;
         this.age = age;
         this.howYaFeelin = howYaFeelin;
