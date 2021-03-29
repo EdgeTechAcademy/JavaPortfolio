@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 
 public class InterviewQuestionsPartA {
@@ -14,6 +15,8 @@ public class InterviewQuestionsPartA {
         borough1 = Utils.getInput("1st Borough: ");
         borough2 = Utils.getInput("2nd Borough: ");
 
+//        borough1Crimes = (int) crimes.stream().filter(c -> c.getBorough().equalsIgnoreCase(borough1)).count();
+//        borough2Crimes = (int) crimes.stream().filter(c -> c.getBorough().equalsIgnoreCase(borough2)).count();
         for (Crime crime : crimes) {
             if (crime.getBorough().equalsIgnoreCase(borough1)) borough1Crimes++;
             if (crime.getBorough().equalsIgnoreCase(borough2)) borough2Crimes++;
@@ -27,6 +30,7 @@ public class InterviewQuestionsPartA {
         //  now move on to the patients data
         //  What is the BMI results for our patients?
         //  let's only print out the normal ones
+//        patients.stream().filter(p -> bodyMassIndex(p.getHeight(), p.getWeight()).startsWith("Normal")).forEach(p -> System.out.format("%s %s is Normal%n", p.getFirstName(), p.getLastName()));
         for (Patient patient : patients) {
             String bmiMessage = bodyMassIndex(patient.getHeight(), patient.getWeight());
             if (bmiMessage.startsWith("Normal"))
@@ -45,12 +49,10 @@ public class InterviewQuestionsPartA {
         //  finally a tour of the student records
         //  which student has the highest GPA
         Student best;
-        best = students.get(0);         //  Get first student as our target student
-        for (Student student : students) {
-            if (best.getGpa() < student.getGpa())
-                best = student;
-        }
-        System.out.format("%n%s has the highest %f%n", best.getName(), best.getGpa());
+        best = students.stream()
+                .max(Comparator.comparingDouble(Student::getGpa))
+                .get();
+        System.out.format("%n%s has the highest GPA %f%n", best.getName(), best.getGpa());
     }
 
     public static String bodyMassIndex(float height, float weight) {
@@ -124,7 +126,6 @@ public class InterviewQuestionsPartA {
                 System.out.print("*");
             }
             System.out.println();
-
         }
     }
 }
